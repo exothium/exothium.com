@@ -71,25 +71,25 @@ function setAnimationWorld(game) {
         onStart: function () {
             setTimeout(() => {
                 galaxyLayer.moveDown(star);
-                console.log("moveDown:star");
+                //console.log("moveDown:star");
             }, rotationDuration * 0.8);
 
             setTimeout(() => {
                 galaxyLayer.moveUp(star);
-                console.log("moveUp:star");
+                //console.log("moveUp:star");
             }, rotationDuration * 0.2);
 
-            console.log("onStart");
+            //console.log("onStart");
         },
         onRepeat() {
             setTimeout(() => {
                 galaxyLayer.moveDown(star);
-                console.log("moveDown:star");
+                //console.log("moveDown:star");
             }, rotationDuration * 0.8);
 
             setTimeout(() => {
                 galaxyLayer.moveUp(star);
-                console.log("moveUp:star");
+                //console.log("moveUp:star");
             }, rotationDuration * 0.2);
         }
     });
@@ -149,7 +149,7 @@ function setAnimationWorld(game) {
     this.anims.create({
         key: 'stars',
         frames: this.anims.generateFrameNumbers('stars', { start: 0, end: 327 }),
-        frameRate: 60,
+        frameRate: 30,
         repeat: -1
     });
 
@@ -299,7 +299,7 @@ function TopContent() {
                     frameHeight: 300
                 });
 
-                this.load.spritesheet('stars', 'assets/exothiumWorldAssets/stars.png', {
+                this.load.spritesheet('stars', 'assets/exothiumWorldAssets/stars_compressed.jpg', {
                     frameWidth: 564,
                     frameHeight: 315
                 });
@@ -317,7 +317,7 @@ function TopContent() {
                 /*graphics.lineStyle(2, 0xffffff, 0.05);
 
                 curve.draw(graphics, 64);*/
-                console.log(star.y);
+                //console.log(star.y);
 
                 curve.getPoint(path.t, path.vec);
 
@@ -331,8 +331,8 @@ function TopContent() {
                 /*planet.setScale(Math.pow(path.vec.y, 7) * 0.000000000000000055 / star.y);*/
                 //planet.setScale((25 + planet.y -  star.y ) / (20 + star.y));
                 planet.setScale(Math.pow(1 + (((planet.y -  star.y) - 10) / (star.y / 20)), 2));
-                console.log(planet.y);
-                console.log(star.y);
+                //console.log(planet.y);
+                // console.log(star.y);
                 //planet.setScale(1);
                 /*star.x = curve.p0.x;
                 star.y =  curve.p0.y;*/
