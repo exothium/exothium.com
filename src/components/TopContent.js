@@ -10,9 +10,10 @@ var text;
 var graphics;
 var planet;
 var star;
+var space_stars;
 var galaxyLayer;
 var circleMaskBlackhole;
-var frontMask;
+var flaremask;
 
 function setBlackHole(game) {
     const maskX = game.width / 2;
@@ -48,7 +49,7 @@ function setAnimationWorld(game) {
     curve.setYRadius(155);
     curve.setStartAngle(0);
     curve.setEndAngle(360);
-    curve.setRotation(1.55);
+    curve.setRotation(1.575);
 
 
     /*createSlider(sliderGraphics, 100, 10, 'width', 500, 0, 400, 10, curve.setXRadius);
@@ -61,7 +62,7 @@ function setAnimationWorld(game) {
     centerPoint.setData('control', 'center').setData('vector', curve.p0);
     this.input.setDraggable(centerPoint);
 
-    let rotationDuration = 15000;
+    let rotationDuration = 30000;
     let rotationtween = this.tweens.add({
         targets: path,
         t: 1,
@@ -96,7 +97,7 @@ function setAnimationWorld(game) {
 
     circleMaskBlackhole = this.add.graphics();
     //backgroundStars.lineStyle(thickness, color, alpha);
-    circleMaskBlackhole = circleMaskBlackhole.setPosition(centerX, centerY - 25).fillCircle(0, 0, 200).strokeCircle(0, 0, 200);
+    circleMaskBlackhole = circleMaskBlackhole.setPosition(centerX - 5, centerY).fillCircle(0, 0, 200).strokeCircle(0, 0, 205);
 
     this.anims.create({
         key: 'orbit',
@@ -131,36 +132,36 @@ function setAnimationWorld(game) {
     star = this.add.sprite(centerX, centerY);
     star.setScale(0.3);
     star.play('rotate');
-    star.setOrigin(0.5, 0.5);
 
     var color = 0xffff00;
     var thickness = 4;
     var alpha = 1;
 
-    let spotlightmask = this.add.image(centerX - 5, centerY - 24.5, 'spotlightmask');
+    let spotlightmask = this.add.image(centerX - 5, centerY, 'spotlightmask');
     spotlightmask.setScale(0.81);
     //spotlightmask.setMask(circleMaskBlackhole.createGeometryMask());
 
-    let flaremask = this.add.image(centerX + 30, centerY, 'flare');
+    flaremask = this.add.image(centerX + 30, centerY, 'flare');
     flaremask.setAlpha(0.65);
     flaremask.setScale(0.5);
     flaremask.setMask(circleMaskBlackhole.createGeometryMask());
 
     this.anims.create({
         key: 'stars',
-        frames: this.anims.generateFrameNumbers('stars', { start: 0, end: 327 }),
-        frameRate: 30,
+        frames: this.anims.generateFrameNumbers('stars', { start: 0, end: 224 }),
+        frameRate: 10,
         repeat: -1
     });
 
-    let space_stars = this.add.sprite(centerX, centerY);
+    space_stars = this.add.sprite(centerX, centerY);
     space_stars.play('stars');
     space_stars.setOrigin(0.5, 0.5);
     space_stars.setScale(1.25);
+    space_stars.setAlpha(0.95);
     space_stars.setMask(circleMaskBlackhole.createGeometryMask());
 
-    let blackhole = this.add.image(centerX, centerY, 'blackhole');
-    blackhole.setAlpha(0.75);
+    let blackhole = this.add.image(centerX, centerY + 24.5, 'blackhole');
+    blackhole.setAlpha(0.5);
     blackhole.setScale(0.4);
 
     galaxyLayer = this.add.layer();
@@ -267,7 +268,7 @@ function updateSlider(handle, pointer, dragX, dragY) {
     callback.call(curve, value);
 }
 
-function TopContent() {
+function TopContent(props) {
     const [game, setGame] = useState({
         width: 800,
         height: 800,
@@ -299,10 +300,15 @@ function TopContent() {
                     frameHeight: 300
                 });
 
-                this.load.spritesheet('stars', 'assets/exothiumWorldAssets/stars_compressed.jpg', {
+                /*this.load.spritesheet('stars', 'assets/exothiumWorldAssets/spritesheet.png', {
+                    frameWidth: 640,
+                    frameHeight: 360
+                });*/
+                this.load.spritesheet('stars', 'assets/exothiumWorldAssets/stars.png', {
                     frameWidth: 564,
                     frameHeight: 315
                 });
+                this.load.on('complete', loadComplete);
             },
             create() {
 
@@ -317,7 +323,6 @@ function TopContent() {
                 /*graphics.lineStyle(2, 0xffffff, 0.05);
 
                 curve.draw(graphics, 64);*/
-                //console.log(star.y);
 
                 curve.getPoint(path.t, path.vec);
 
@@ -331,15 +336,20 @@ function TopContent() {
                 /*planet.setScale(Math.pow(path.vec.y, 7) * 0.000000000000000055 / star.y);*/
                 //planet.setScale((25 + planet.y -  star.y ) / (20 + star.y));
                 planet.setScale(Math.pow(1 + (((planet.y -  star.y) - 10) / (star.y / 20)), 2));
-                //console.log(planet.y);
-                // console.log(star.y);
-                //planet.setScale(1);
-                /*star.x = curve.p0.x;
-                star.y =  curve.p0.y;*/
-                /*console.log(planet.y)*/
+                space_stars.rotation -= 0.0005;
+                if(planet.scale > 0.875 ) {
+                    flaremask.setVisible(false);
+                } else {
+                    flaremask.setVisible(true);
+                }
+
             }
         }
     });
+
+    const loadComplete = () => {
+        props.completeLoading('blackhole');
+    }
 
 
     return (

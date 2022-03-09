@@ -1,16 +1,38 @@
 import logo from './logo.svg';
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import TopContent from "./components/TopContent";
 import TextGradient from "./components/TextGradient";
+import Loading from "./components/loading/Loading";
 import NoiseToSignal from "./components/NoiseToSignal";
 
 
 function App() {
+    const [phaserLoad, setPhaserLoad] = useState(['blackhole']);
+
+    /*useEffect(() => {
+        setPhaserLoad(['blackhole']);
+    }, []);*/
+
+    const listenerCompleteLoading = (canvas) => {
+        let phaserLoadAux = JSON.parse(JSON.stringify(phaserLoad));
+        var index = phaserLoadAux.indexOf(canvas);
+        if (index !== -1) {
+            phaserLoadAux.splice(index, 1);
+        }
+        setPhaserLoad(phaserLoadAux);
+    };
+
     return (
+
         <div className="App">
+            <Loading
+                loadingComplete={phaserLoad.length > 0 ? false : true}
+            />
             <header className="App-header">
-                <TopContent/>
+                <TopContent
+                    completeLoading={listenerCompleteLoading}
+                />
             </header>
             <body>
             <div>
@@ -21,6 +43,7 @@ function App() {
                 <NoiseToSignal style={{marginTop: "-2px"}} width='auto' height='400px'/>
             </div>
             </body>
+
         </div>
     );
 }
