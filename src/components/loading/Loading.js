@@ -23,9 +23,11 @@ function Loading(props) {
         }, 100);
     }
 
+    var isLoaded = opacity <= 0 ? true : false;
+
     return (
-        <div className="loading" style={{opacity: opacity, display: opacity <= 0 ? 'hidden' : 'initial'}}>
-            <div className="socket" style={{opacity: opacity}}>
+        <div className="loading" style={{ opacity: opacity, display: isLoaded ? 'hidden' : 'initial', zIndex: isLoaded ? '-10' : '10' }}>
+            <div className="socket" style={{ opacity: opacity }}>
                 <div className="gel center-gel">
                     <div className="hex-brick h1"></div>
                     <div className="hex-brick h2"></div>
