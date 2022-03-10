@@ -15,6 +15,14 @@ var galaxyLayer;
 var circleMaskBlackhole;
 var flaremask;
 
+//camera
+var maxX = 0;
+var minX = 0;
+var maxY = 0;
+var minY = 0;
+let newX = 0;
+let newY = 0;
+
 function setBlackHole(game) {
     const maskX = game.width / 2;
     const maskY = game.height / 2;
@@ -168,8 +176,6 @@ function setAnimationWorld(game) {
     galaxyLayer.add([space_stars, star, planet, blackhole, spotlightmask, flaremask]);
     //  Debug graphics
     graphics = this.add.graphics();
-
-
 }
 
 function createSlider(graphics, x, y, label, width, min, max, value, callback) {
@@ -314,6 +320,12 @@ function TopContent(props) {
 
                 setAnimationWorld(game);
                 //setBlackHole(game);
+
+                maxX = game.width / 2 + game.width/20;
+                minX = game.width / 2 - game.width/20;
+                maxY = game.height / 2 + game.height/20;
+                minY = game.height / 2 - game.height/20;
+                /*this.input.on('mousewheel',function(event){    return false;}, false);*/
             },
             update() {
                 //this.backgroundImage.angle += 1.25;
@@ -333,23 +345,32 @@ function TopContent(props) {
                 planet.y = path.vec.y;
                 //make planet bigger or smaller depending on y
 
-                /*planet.setScale(Math.pow(path.vec.y, 7) * 0.000000000000000055 / star.y);*/
-                //planet.setScale((25 + planet.y -  star.y ) / (20 + star.y));
                 planet.setScale(Math.pow(1 + (((planet.y -  star.y) - 10) / (star.y / 20)), 2));
-                space_stars.rotation -= 0.0005;
+                //space_stars.rotation -= 0.0005;
                 if(planet.scale > 0.875 ) {
                     flaremask.setVisible(false);
                 } else {
                     flaremask.setVisible(true);
                 }
 
+                newX = space_stars.x - ((this.input.mousePointer.worldX - space_stars.x) / 5000);
+                newY = space_stars.y - ((this.input.mousePointer.worldY - space_stars.y) / 5000);
+
+                if(newX >= minX && newX <= maxX) {
+                    space_stars.x = newX;
+
+                }
+                if(newY >= minY && newY <= maxY) {
+                    space_stars.y = newY;
+                }
+                /*space_stars.y = space_stars.y - ((space_stars.y - pointer.y) / 100);*/
             }
         }
     });
 
     const loadComplete = () => {
         props.completeLoading('blackhole');
-    }
+    };
 
 
     return (
