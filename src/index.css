@@ -35,6 +35,10 @@ code {
   monospace;
 }
 
+a {
+  color: #ffd493;
+}
+
 @font-face {
   font-family: Montreal;
   src: url('../public/assets/PPNeueMontreal-Book.otf') format("opentype");

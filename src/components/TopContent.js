@@ -284,7 +284,7 @@ function TopContent(props) {
                 this.cameras.main.setBackgroundColor('#121212');
                 setBlackHole = setBlackHole.bind(this);
                 setAnimationWorld = setAnimationWorld.bind(this);
-                //createSlider = createSlider.bind(this);
+                createSlider = createSlider.bind(this);
             },
             preload() {
                 //this.load.image('mask', 'assets/mainAssets/ExothiumLogo.svg');
