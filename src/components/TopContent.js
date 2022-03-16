@@ -122,13 +122,13 @@ function setAnimationWorld(game) {
     planet.play('orbit');
     planet.setMask(circleMaskBlackhole.createGeometryMask());
 
-    planet.on('pointerover', function (pointer) {
+    /*planet.on('pointerover', function (pointer) {
         this.setTint(0xff0000);
     });
 
     planet.on('pointerout', function (pointer) {
         this.clearTint();
-    });
+    });*/
 
     this.anims.create({
         key: 'rotate',
@@ -276,15 +276,15 @@ function updateSlider(handle, pointer, dragX, dragY) {
 
 function TopContent(props) {
     const [game, setGame] = useState({
-        width: 800,
-        height: 800,
+        width: 750,
+        height: 750,
         type: Phaser.AUTO,
         scene: {
             init: function () {
                 this.cameras.main.setBackgroundColor('#121212');
                 setBlackHole = setBlackHole.bind(this);
                 setAnimationWorld = setAnimationWorld.bind(this);
-                createSlider = createSlider.bind(this);
+                //createSlider = createSlider.bind(this);
             },
             preload() {
                 //this.load.image('mask', 'assets/mainAssets/ExothiumLogo.svg');
@@ -353,7 +353,7 @@ function TopContent(props) {
                     flaremask.setVisible(true);
                 }
 
-                newX = space_stars.x - ((this.input.mousePointer.worldX - space_stars.x) / 5000);
+                /*newX = space_stars.x - ((this.input.mousePointer.worldX - space_stars.x) / 5000);
                 newY = space_stars.y - ((this.input.mousePointer.worldY - space_stars.y) / 5000);
 
                 if(newX >= minX && newX <= maxX) {
@@ -363,6 +363,7 @@ function TopContent(props) {
                 if(newY >= minY && newY <= maxY) {
                     space_stars.y = newY;
                 }
+                */
                 /*space_stars.y = space_stars.y - ((space_stars.y - pointer.y) / 100);*/
             }
         }

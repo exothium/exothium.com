@@ -4,10 +4,10 @@
     background: #121212;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     flex-wrap: wrap;
 }
 
 .blackHole {
-    height: 150px;
+    height: 125px;
 }

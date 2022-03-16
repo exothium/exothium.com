@@ -1,0 +1,47 @@
+.roadmapParent {
+    display: flex;
+    flex-direction: column;
+}
+
+.roadmapTitle {
+    font-family: Metro;
+    color: whitesmoke;
+    font-size: 50px;
+    display: flex;
+    margin-top: 25px;
+}
+
+.roadmapContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0px;
+}
+.roadmapcardContainer {
+    margin: 25px 25px;
+    width: 400px;
+    min-height: 300px;
+    background-repeat: no-repeat;
+    color: whitesmoke;
+    padding: 25px 50px;
+    display: flex;
+    font-family: Montreal;
+}
+
+.roadmapHeader {
+    text-align: initial;
+    font-size: 30px;
+    font-family: Metro;
+    margin-top: 40px;
+    margin-bottom: 5px;
+    color: #ee5726;
+}
+
+.roadmapItems {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    font-size: 20px;
+}

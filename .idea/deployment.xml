@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="exothium">
+    <serverData>
+      <paths name="exothium">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/var/www/html/beta_exothium" local="$PROJECT_DIR$/build" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

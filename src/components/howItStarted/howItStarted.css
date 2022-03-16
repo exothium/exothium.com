@@ -1,0 +1,19 @@
+.howItStartedParent {
+    margin: 125px 0px;
+}
+
+.howItStartedText {
+    margin-top: 75px;
+    color: navajowhite;
+    font-family: Montreal;
+    font-size: 22px;
+    text-align: left;
+}
+
+.howItStartedAuthor {
+    margin-top: 25px;
+    color: whitesmoke;
+    font-family: Montreal;
+    font-size: 20px;
+    text-align: right;
+}

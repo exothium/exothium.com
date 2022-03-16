@@ -5,10 +5,15 @@ import TopContent from "./components/TopContent";
 import TextGradient from "./components/TextGradient";
 import Loading from "./components/loading/Loading";
 import NoiseToSignal from "./components/NoiseToSignal";
+import Roadmap from "./components/roadmap/Roadmap";
+import { useParallax, useParallaxController, Parallax, ParallaxProvider } from 'react-scroll-parallax';
+import HowItStarted from "./components/howItStarted/HowItStarted";
 
 
 function App() {
     const [phaserLoad, setPhaserLoad] = useState(['blackhole']);
+    const [noiseToSignalEntered, setNoiseToSignalEntered] = useState(false);
+    const parallaxController = useParallaxController();
 
     /*useEffect(() => {
         setPhaserLoad(['blackhole']);
@@ -21,30 +26,80 @@ function App() {
             phaserLoadAux.splice(index, 1);
         }
         setPhaserLoad(phaserLoadAux);
+        parallaxController.update();
     };
 
     return (
-
-        <div className="App">
-            <Loading
-                loadingComplete={phaserLoad.length > 0 ? false : true}
-            />
-            <header className="App-header">
-                <TopContent
-                    completeLoading={listenerCompleteLoading}
+        <ParallaxProvider>
+            <div className="App">
+                <Loading
+                    loadingComplete={phaserLoad.length > 0 ? false : true}
                 />
-            </header>
-            <body>
-            <div>
-                <TextGradient/>
-            </div>
-            <div width='auto'>
-                <div style={{width: "200px",height:'10px',backgroundColor:"#121212",position:"relative"}} width='50%' height='20' backgroundColor="white"/>
-                <NoiseToSignal style={{marginTop: "-2px"}} width='auto' height='400px'/>
-            </div>
-            </body>
+                <div className="App-header">
+                    <TopContent
+                        completeLoading={listenerCompleteLoading}
+                        style={{
+                            cursor: 'pointer'
+                        }}
+                    />
+                </div>
+                <Parallax
+                    opacity={[
+                        0,
+                        1,
+                        'ease'
+                    ]}
+                >
+                    <TextGradient/>
+                </Parallax>
+                <Parallax
+                    onEnter={() => setNoiseToSignalEntered(true)}
+                >
+                    <HowItStarted/>
+                </Parallax>
+                <Parallax
+                    onEnter={() => setNoiseToSignalEntered(true)}
+                >
+                    <Roadmap/>
+                </Parallax>
+                {noiseToSignalEntered &&
+                <Parallax
+                    opacity={[
+                        -0.5,
+                        1,
+                        'ease'
+                    ]}
+                    translateX={[
+                        '-10%',
+                        '-10%',
+                        'ease'
+                    ]}
+                    rootMargin={{ top: 500, right: 100, bottom: 0, left: 100 }}
+                >
+                    <NoiseToSignal width='auto'/>
+                </Parallax>
+                }
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        margin: '25px 0px'
+                    }}
+                >
+                    <a target="_blank" href="https://discord.gg/yhNrcBmBgA">
+                    <img
+                        src={'./assets/icons/discord_get_in_no_font.svg'}
+                        alt="discordIcon"
+                        style={{
+                            width: '150px',
+                            cursor: 'pointer'
+                        }}
 
-        </div>
+                    />
+                    </a>
+                </div>
+            </div>
+        </ParallaxProvider>
     );
 }
 
