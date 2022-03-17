@@ -17,7 +17,7 @@ function Roadmap() {
                     'ease'
                 ]}
                 opacity={[
-                    -5,
+                    -10,
                     1,
                     'ease'
                 ]}
@@ -29,6 +29,7 @@ function Roadmap() {
                     style={{
                         width: '500px',
                         display: 'flex',
+                        maxWidth: '75%'
                     }}
                     onLoad={handleLoad}
                 />
@@ -52,11 +53,17 @@ function Roadmap() {
             </Parallax>
             <div className='roadmapContainer'>
                 <Parallax
+                    translateY={[
+                        '-450%',
+                        '0%',
+                        'ease'
+                    ]}
                     opacity={[
-                        -0.5,
+                        -10,
                         1,
                         'ease'
                     ]}
+                    rootMargin={{ top: 1500, right: 100, bottom: 0, left: 100 }}
                 >
                     <div className='roadmapcardContainer'
                          style={{ backgroundImage: "url('./assets/mainAssets/background_roadmap_card.svg')" }}>
@@ -73,11 +80,17 @@ function Roadmap() {
                     </div>
                 </Parallax>
                 <Parallax
+                    translateY={[
+                        '-450%',
+                        '0%',
+                        'ease'
+                    ]}
                     opacity={[
-                        -0.5,
+                        -10,
                         1,
                         'ease'
                     ]}
+                    rootMargin={{ top: 1500, right: 100, bottom: 0, left: 100 }}
                 >
                     <div className='roadmapcardContainer'
                          style={{ backgroundImage: "url('./assets/mainAssets/background_roadmap_card_simple.svg')" }}>
@@ -94,11 +107,17 @@ function Roadmap() {
                     </div>
                 </Parallax>
                 <Parallax
+                    translateY={[
+                        '-450%',
+                        '0%',
+                        'ease'
+                    ]}
                     opacity={[
-                        -0.5,
+                        -10,
                         1,
                         'ease'
                     ]}
+                    rootMargin={{ top: 1500, right: 100, bottom: 0, left: 100 }}
                 >
                     <div className='roadmapcardContainer'
                          style={{ backgroundImage: "url('./assets/mainAssets/background_roadmap_card_simple.svg')" }}>

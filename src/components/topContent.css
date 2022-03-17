@@ -1,6 +1,6 @@
 .topContentBody {
     width: 100%;
-    min-height: 500px;
+    min-height: 250px;
     background: #121212;
     display: flex;
     align-items: center;
@@ -10,4 +10,12 @@
 
 .blackHole {
     height: 125px;
+    max-width: 100%;
 }
+
+@media screen and (max-width: 650px) {
+    .phaserTopContent {
+        zoom: 0.35;
+    }
+}
+

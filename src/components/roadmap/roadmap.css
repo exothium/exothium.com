@@ -21,7 +21,7 @@
 .roadmapcardContainer {
     margin: 25px 25px;
     width: 400px;
-    min-height: 300px;
+    min-height: 150px;
     background-repeat: no-repeat;
     color: whitesmoke;
     padding: 25px 50px;
@@ -46,8 +46,18 @@
     font-size: 20px;
 }
 
-/*@media screen and (max-width: 600px) {
+@media screen and (max-width: 650px) {
     .roadmapcardContainer {
-        width: 95% !important;
+        width: 295px !important;
+        padding: 5px 25px;
     }
-}*/
+    .roadmapTitle {
+        font-size: 20px;
+    }
+    .roadmapHeader {
+        font-size: 20px;
+    }
+    .roadmapItems {
+        font-size: 16px;
+    }
+}

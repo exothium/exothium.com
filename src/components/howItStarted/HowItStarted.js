@@ -19,7 +19,7 @@ function HowItStarted() {
                     'ease'
                 ]}
                 opacity={[
-                    -5,
+                    -20,
                     1,
                     'ease'
                 ]}
@@ -31,6 +31,7 @@ function HowItStarted() {
                     style={{
                         width: '500px',
                         display: 'flex',
+                        maxWidth: '75%'
                     }}
                     onLoad={handleLoad}
                 />
@@ -72,7 +73,7 @@ function HowItStarted() {
                     <div className='howItStartedText'>
                         <Parallax
                             opacity={[
-                                -0.5,
+                                0.5,
                                 1,
                                 'ease'
                             ]}
@@ -88,7 +89,7 @@ function HowItStarted() {
                         </Parallax>
                         <Parallax
                             opacity={[
-                                -0.5,
+                                0.5,
                                 1,
                                 'ease'
                             ]}
@@ -107,7 +108,7 @@ function HowItStarted() {
                         </Parallax>
                         <Parallax
                             opacity={[
-                                -0.5,
+                                0.5,
                                 1,
                                 'ease'
                             ]}
@@ -132,7 +133,7 @@ function HowItStarted() {
                         </Parallax>
                         <Parallax
                             opacity={[
-                                -0.5,
+                                0.5,
                                 1,
                                 'ease'
                             ]}
@@ -160,7 +161,7 @@ function HowItStarted() {
             </Parallax>
             <Parallax
                 opacity={[
-                    -0.5,
+                    0,
                     1,
                     'ease'
                 ]}

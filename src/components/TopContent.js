@@ -381,7 +381,7 @@ function TopContent(props) {
                 alt="Logo"
                 className="blackHole"
             />
-            <IonPhaser game={game} initialize={true}/>
+            <IonPhaser game={game} initialize={true} className='phaserTopContent'/>
         </div>
     );
 }

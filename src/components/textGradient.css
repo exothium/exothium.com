@@ -23,3 +23,10 @@
     color: whitesmoke;
     font-family: Montreal_bold;
 }
+
+@media screen and (max-width: 650px) {
+    .textGradientParent {
+        font-size: 20px;
+        padding: 25px 0px 50px 0px;
+    }
+}
