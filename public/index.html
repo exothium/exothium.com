@@ -1,36 +1,78 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/favicons/assets/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/assets/favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/assets/favicons/favicon-16x16.png">
-    <link rel="manifest" href="%PUBLIC_URL%/assets/favicons/site.webmanifest">
-    <link rel="mask-icon" href="%PUBLIC_URL%/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
-    <meta name="msapplication-TileColor" content="#da532c">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv='cache-control' content='no-cache'>
-    <meta http-equiv='expires' content='0'>
-    <meta http-equiv='pragma' content='no-cache'>
+<head>
+  <script>window._fs_debug = !1, window._fs_host = "fullstory.com", window._fs_script = "edge.fullstory.com/s/fs.js", window._fs_org = "1919JS", window._fs_namespace = "FS", function (n, e, t, o, s, c, i, f) {
+    t in n ? n.console && n.console.log && n.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].') : ((i = n[t] = function (n, e, t) {
+      i.q ? i.q.push([n, e, t]) : i._api(n, e, t)
+    }).q = [], (c = e.createElement(o)).async = 1, c.crossOrigin = "anonymous", c.src = "https://" + _fs_script, (f = e.getElementsByTagName(o)[0]).parentNode.insertBefore(c, f), i.identify = function (n, e, t) {
+      i(s, {uid: n}, t), e && i(s, e, t)
+    }, i.setUserVars = function (n, e) {
+      i(s, n, e)
+    }, i.event = function (n, e, t) {
+      i("event", {n: n, p: e}, t)
+    }, i.anonymize = function () {
+      i.identify(!1)
+    }, i.shutdown = function () {
+      i("rec", !1)
+    }, i.restart = function () {
+      i("rec", !0)
+    }, i.log = function (n, e) {
+      i("log", [n, e])
+    }, i.consent = function (n) {
+      i("consent", !arguments.length || n)
+    }, i.identifyAccount = function (n, e) {
+      c = "account", (e = e || {}).acctId = n, i(c, e)
+    }, i.clearUserCookie = function () {
+    }, i.setVars = function (n, e) {
+      i("setVars", [n, e])
+    }, i._w = {}, f = "XMLHttpRequest", i._w[f] = n[f], f = "fetch", i._w[f] = n[f], n[f] && (n[f] = function () {
+      return i._w[f].apply(this, arguments)
+    }), i._v = "1.3.0")
+  }(window, document, window._fs_namespace, "script", "user")</script>
+  <meta charset="utf-8"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicons/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicons/favicon-16x16.png">
+  <link rel="manifest" href="/assets/favicons/site.webmanifest">
+  <link rel="mask-icon" href="/assets/favicons/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ff4136">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <title>Exothium</title>
-    <script src='node_modules/@ion-phaser/core/dist/ionphaser/ionphaser.esm.js'></script>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div style="font-family:Montreal; position:absolute; left:-1000px; visibility:hidden;">.</div>
-    <div style="font-family:Montreal_bold; position:absolute; left:-1000px; visibility:hidden;">.</div>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+  <!-- Primary Meta Tags -->
+  <title>Exothium</title>
+  <meta name="title" content="More Than Games">
+  <meta name="description" content="Exothium, the foundation for creative work, collaboration and fun.
+  - We aim to make this a place of enormous passion and soul, where game related projects can grow.">
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://exothium.com/">
+  <meta property="og:title" content="More Than Games">
+  <meta property="og:description" content="Exothium, the foundation for creative work, collaboration and fun.
+  - We aim to make this a place of enormous passion and soul, where game related projects can grow.">
+  <meta property="og:image" content="https://exothium.com/assets/mainAssets/Exothium_metadata_thumbnail.jpg">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://exothium.com/">
+  <meta property="twitter:title" content="More Than Games">
+  <meta property="twitter:description" content="Exothium, the foundation for creative work, collaboration and fun.
+  - We aim to make this a place of enormous passion and soul, where game related projects can grow.">
+  <meta property="twitter:image" content="https://exothium.comhttps://exothium.com/assets/mainAssets/Exothium_metadata_thumbnail.jpg">
+
+  <!-- Meta Tags  -->
+
+
+  <script src="node_modules/@ion-phaser/core/dist/ionphaser/ionphaser.esm.js"></script>
+  <script defer="defer" src="/static/js/main.4143252c.js"></script>
+  <link href="/static/css/main.8b03a1dd.css" rel="stylesheet">
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div style="font-family:Montreal;position:absolute;left:-1000px;visibility:hidden">.</div>
+<div style="font-family:Montreal_bold;position:absolute;left:-1000px;visibility:hidden">.</div>
+<div id="root"></div>
+</body>
 </html>
