@@ -8,7 +8,7 @@ import NoiseToSignal from "./components/NoiseToSignal";
 import Roadmap from "./components/roadmap/Roadmap";
 import { useParallax, useParallaxController, Parallax, ParallaxProvider } from 'react-scroll-parallax';
 import HowItStarted from "./components/howItStarted/HowItStarted";
-
+import axios from "axios";
 
 function App() {
     const [phaserLoad, setPhaserLoad] = useState(['blackhole']);
@@ -28,6 +28,34 @@ function App() {
         setPhaserLoad(phaserLoadAux);
         parallaxController.update();
     };
+
+
+    useEffect(() => {
+        const getUser = async () => {
+          await axios.get("http://localhost:5000/", {
+            withCredentials: true,
+            headers: {
+              "Content-Type": "application/json",
+              "Access-Control-Allow-Credentials": true
+            }
+          }).then((res) => {
+            console.log(res.data)
+          })
+        }
+
+        getUser()
+    }, [])
+
+    const loginTwitter = () => {
+        window.open("http://localhost:5000/twitter", "_self")
+    }
+    const loginGithub = () => {
+        window.open("http://localhost:5000/github", "_self")
+    }
+    
+    const logout = () => {
+        window.open("http://localhost:5000/logout", "_self")
+    }
 
     return (
         <ParallaxProvider>
@@ -97,6 +125,43 @@ function App() {
 
                     />
                     </a>
+
+                    <a target="_blank" onClick={loginTwitter}>
+                    <img
+                        src={'./assets/icons/twitter-icon.png'}
+                        alt="discordIcon"
+                        style={{
+                            marginLeft: "60px",
+                            width: '70px',
+                            cursor: 'pointer'
+                        }}
+                    />
+                    </a>
+
+                    <a target="_blank" onClick={loginGithub}>
+                    <img
+                        src={'./assets/icons/github-icon.png'}
+                        alt="githubIcon"
+                        style={{
+                            marginLeft: "60px",
+                            width: '70px',
+                            cursor: 'pointer'
+                        }}
+                    />
+                    </a>
+
+                    {/* Icon for loging out of any social media account*/}
+                    {/* <a target="_blank" onClick={logout}>
+                    <img
+                        src={'./assets/icons/logout-icon.png'}
+                        alt="logoutIcon"
+                        style={{
+                            marginLeft: "60px",
+                            width: '70px',
+                            cursor: 'pointer'
+                        }}
+                    />
+                    </a> */}
                 </div>
             </div>
         </ParallaxProvider>
