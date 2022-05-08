@@ -1,11 +1,11 @@
-import { questsInfo } from "./quests";
+import { questsInfo } from "./questsInfo";
 import { number, shortString } from "starknet";
 
 const { toBN, toHex } = number;
 const { encodeShortString, decodeShortString } = shortString;
 
 
-class QuestsAux {
+class QuestsState {
     constructor() {
         this.quests = questsInfo;
         this.dispatchQuests = null;
@@ -31,12 +31,13 @@ class QuestsAux {
         }
     }
 
-    getStarknetContractQuests(contracts, starknet) {
-        this.getRegisterContractQuest(contracts.registerContract, 'registerContract', starknet);
+    // gets data from deployed contracts
+    getStarknetQuestsData(contracts, starknet) {
+        this.getRegisterQuestData(contracts.registerContract, 'registerContract', starknet);
     }
 
-    //quest number 1
-    getRegisterContractQuest(registerContract, contractName, starknet) {
+    // gets data from deployed register contract
+    getRegisterQuestData(registerContract, contractName, starknet) {
         let auxThis = this;
         let questNumber = this.getQuestNumber(contractName);
         registerContract.get_address_registry(starknet.selectedAddress).then(function (value) {
@@ -51,6 +52,8 @@ class QuestsAux {
 
             let questsUpdate = JSON.parse(JSON.stringify(auxThis.quests));
             questsUpdate[questNumber - 1].starknetContractInfo = starknetContractInfo;
+            questsUpdate[questNumber - 1].contractInteraction.twitter.value = twitterValue;
+            questsUpdate[questNumber - 1].contractInteraction.github.value = githubValue;
             if(twitterValue || githubValue) {
                 questsUpdate[questNumber - 1].finished = true;
             }
@@ -61,4 +64,4 @@ class QuestsAux {
     }
 }
 
-export default QuestsAux;
+export default QuestsState;
