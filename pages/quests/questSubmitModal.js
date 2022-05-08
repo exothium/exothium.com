@@ -71,12 +71,12 @@ function QuestSubmitModal(props) {
 
     return (
         <form onSubmit={handleRegisterSubmit}>
-            <div>Sign with Twitter</div>
+            <div>Twitter Username</div>
             <input
                 onChange={handleChangeTwitter}
                 value={twitter}
             />
-            <div>Sign with Github {decodeShortString(encodeShortString('hey'))}</div>
+            <div>Github Username</div>
             <input
                 onChange={handleChangeGithub}
                 value={github}
