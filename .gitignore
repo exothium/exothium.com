@@ -1,0 +1,10 @@
+# Intellij
+*.iml
+.idea/*
+
+# Run/Debug configurations
+!.idea/runConfigurations
+
+# dotenv environment variables file
+.env
+
