@@ -40,7 +40,7 @@ import dynamic from "next/dynamic";
 function MyApp({ Component, pageProps }) {
     const [phaserLoad, setPhaserLoad] = useState(['blackhole']);
     const [noiseToSignalEntered, setNoiseToSignalEntered] = useState(false);
-
+    console.log("testing beta branch");
     useEffect(() => {
     }, []);
 
