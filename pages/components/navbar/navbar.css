@@ -1,0 +1,26 @@
+.navbar {
+    display: flex;
+    padding: 25px;
+    padding-bottom: 0px;
+}
+
+.navbarNavigation {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.navbarLogo {
+    height: 75px;
+    max-width: 100%;
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+.navbarTitle {
+    font-family: Metro;
+    margin-left: 25px;
+    margin-bottom: 0px;
+    color: whitesmoke;
+    text-transform: capitalize;
+}

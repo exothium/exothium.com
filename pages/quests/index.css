@@ -1,0 +1,124 @@
+.questsPageMain {
+    padding: 25px;
+    color: navajowhite;
+}
+
+.questsBackgroundWrapper {
+    background-image: url('/assets/mainAssets/exothium_quests.jpeg');
+    border-radius: 25px;
+    background-size: cover;
+    background-position: bottom;
+    min-height: 750px;
+    animation: animatedBackground 60s linear infinite alternate;
+    display: flex;
+    justify-content: center;
+    padding: 25px;
+}
+
+@keyframes animatedBackground {
+    from {
+        background-position: bottom right;
+    }
+    to {
+        background-position: center right;
+    }
+}
+
+.questCard {
+    background: linear-gradient(to top right, rgb(239, 88, 37) 0%, rgba(161, 3, 91, 0.6) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 275px;
+    width: 500px;
+    border-radius: 10px;
+    color: whitesmoke;
+    padding: 15px;
+}
+
+.questName {
+    font-family: Metro;
+}
+
+.questCardTitle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: navajowhite;
+}
+
+.questCardItemRow {
+    width: 100%;
+    display: flex;
+    margin: 15px 0px;
+}
+
+.questCardKey {
+    font-weight: bold;
+    color: navajowhite;
+    text-align: left;
+    margin-right: 5px;
+    white-space: nowrap;
+}
+
+.questCardValue {
+    color: whitesmoke;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    text-align: left;
+}
+
+.questStatus {
+    font-size: 25px;
+    font-family: Metro;
+}
+
+.questStatusComplete {
+    animation: colorGreenAnimation 3.5s infinite;
+}
+
+@keyframes colorGreenAnimation {
+    0% { color: rgba(0, 33, 0, 0.71); }
+    50% { color: rgba(239, 88, 37, 0.71); }
+    100% { color: rgba(0, 33, 0, 0.71); }
+}
+
+.questStatusIncomplete {
+    animation: colorRedAnimation 3.5s infinite;
+}
+
+@keyframes colorRedAnimation {
+    0% { color: rgba(168, 0, 13, 1); }
+    50% { color: rgba(161, 3, 91, 0.71); }
+    100% { color: rgba(168, 0, 13, 1); }
+}
+
+.interactWithContract {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 15px;
+}
+
+.interactWithContractButton {
+    padding: 5px 10px;
+    color: navajowhite;
+    border: 2px solid transparent;
+    border-radius: 15px;
+    background: linear-gradient(to right, #121212, #121212), linear-gradient(to right, #ef5825 , transparent);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.interactWithContractButton:hover {
+    background: linear-gradient(to right, #121212, #121212), linear-gradient(to right, transparent, #a1035b);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    font-weight: bold;
+    color: whitesmoke;
+}

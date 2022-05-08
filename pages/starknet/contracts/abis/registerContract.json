@@ -1,0 +1,38 @@
+[
+  {
+    "inputs": [
+      {
+        "name": "key",
+        "type": "felt"
+      }
+    ],
+    "name": "get_address_registry",
+    "outputs": [
+      {
+        "name": "twitter",
+        "type": "felt"
+      },
+      {
+        "name": "github",
+        "type": "felt"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "name": "twitter",
+        "type": "felt"
+      },
+      {
+        "name": "github",
+        "type": "felt"
+      }
+    ],
+    "name": "set_address_registry",
+    "outputs": [],
+    "type": "function"
+  }
+]

@@ -1,0 +1,74 @@
+.accountRoot {
+
+}
+
+.accountButton {
+    width: 200px;
+    height: 30px;
+    color: navajowhite;
+    border: 2px solid transparent;
+    border-radius: 15px;
+    background: linear-gradient(to right, #121212, #121212), linear-gradient(to right, #ef5825 , transparent);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.accountButton:hover {
+    background: linear-gradient(to right, #121212, #121212), linear-gradient(to right, transparent, #a1035b);
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    font-weight: bold;
+    color: whitesmoke;
+}
+
+.modal {
+    position: absolute;
+    top: 40px;
+    left: 40px;
+    right: 40px;
+    bottom: 40px;
+    background: linear-gradient(to bottom, #ef5825 , #a1035b);
+    color: whitesmoke;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 10px rgba(161, 3, 91, 0.25);
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(1, 1, 1, 0.75));
+}
+
+.accountSection {
+    padding-bottom: 35px;
+}
+
+.accountSectionRow {
+    display: flex;
+    flex-direction: column;
+}
+
+.accountSectionTitle {
+    font-family: Metro;
+    font-size: 25px;
+}
+
+.accountSectionKey {
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.accountSectionValue {
+    margin-left: 5px;
+    color: navajowhite;
+    cursor: pointer;
+}
