@@ -43,6 +43,8 @@ class QuestsState {
         registerContract.get_address_registry(starknet.selectedAddress).then(function (value) {
             let twitterValue = decodeShortString(toHex(value.twitter));
             let githubValue = decodeShortString(toHex(value.github));
+            twitterValue =  twitterValue === "0" ? null : twitterValue;
+            githubValue = githubValue === "0" ? null : githubValue;
 
             let starknetContractInfo = {
                 twitter: twitterValue,
