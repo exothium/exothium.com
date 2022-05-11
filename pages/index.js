@@ -27,6 +27,8 @@ export default function Home() {
             <body>
             <div style={{fontFamily: 'Montreal', position: 'absolute', left: '-1000px', visibility: 'hidden'}}>.</div>
             <div style={{fontFamily: 'Montreal_bold', position: 'absolute', left: '-1000px', visibility: 'hidden' }}>.</div>
+            <div style={{fontFamily: 'MondwestPixel', position: 'absolute', left: '-1000px', visibility: 'hidden' }}>.</div>
+            <div style={{fontFamily: 'NeueBit', position: 'absolute', left: '-1000px', visibility: 'hidden' }}>.</div>
             <div id="root"></div>
             </body>
 
