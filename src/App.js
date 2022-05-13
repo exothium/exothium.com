@@ -52,10 +52,16 @@ function App() {
     const loginGithub = () => {
         window.open("http://localhost:5000/github", "_self")
     }
+
+    const loginDiscord = () => {
+        window.open("http://localhost:5000/discord", "_self")
+    }
     
     const logout = () => {
         window.open("http://localhost:5000/logout", "_self")
     }
+
+    
 
     return (
         <ParallaxProvider>
@@ -142,6 +148,30 @@ function App() {
                     <img
                         src={'./assets/icons/github-icon.png'}
                         alt="githubIcon"
+                        style={{
+                            marginLeft: "60px",
+                            width: '70px',
+                            cursor: 'pointer'
+                        }}
+                    />
+                    </a>
+
+                    <a target="_blank" onClick={loginDiscord}>
+                    <img
+                        src={'./assets/icons/discord-icon.png'}
+                        alt="discordIcon"
+                        style={{
+                            marginLeft: "60px",
+                            width: '70px',
+                            cursor: 'pointer'
+                        }}
+                    />
+                    </a>
+
+                    <a target="_blank" onClick={logout}>
+                    <img
+                        src={'./assets/icons/logout-icon.png'}
+                        alt="logoutIcon"
                         style={{
                             marginLeft: "60px",
                             width: '70px',
