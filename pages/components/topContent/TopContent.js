@@ -20,6 +20,10 @@ function TopContent(props) {
     var input;
     var rotationtween;
     var planet_on_hover;
+    var rotationDuration = 25000;
+    var rotationPaused = false;
+    var moveUp;
+    var moveDown;
 
     var setQuestVisible;
 
@@ -79,10 +83,10 @@ function TopContent(props) {
                 setAnimationWorld(game);
                 //setBlackHole(game);
 
-                maxX = game.width / 2 + game.width/20;
-                minX = game.width / 2 - game.width/20;
-                maxY = game.height / 2 + game.height/20;
-                minY = game.height / 2 - game.height/20;
+                maxX = game.width / 2 + game.width / 20;
+                minX = game.width / 2 - game.width / 20;
+                maxY = game.height / 2 + game.height / 20;
+                minY = game.height / 2 - game.height / 20;
                 /*this.input.on('mousewheel',function(event){    return false;}, false);*/
                 input = this.input;
                 this.input.setDefaultCursor('url(assets/exothiumWorldAssets/cursor.cur), pointer');
@@ -107,9 +111,9 @@ function TopContent(props) {
 
                 //make planet bigger or smaller depending on y
 
-                planet.setScale(Math.pow(1 + (((planet.y -  star.y) - 10) / (star.y / 20)), 2));
+                planet.setScale(Math.pow(1 + (((planet.y - star.y) - 10) / (star.y / 20)), 2));
                 //space_stars.rotation -= 0.0005;
-                if(planet.scale > 0.875 ) {
+                if (planet.scale > 0.875) {
                     flaremask.setVisible(false);
                 } else {
                     flaremask.setVisible(true);
@@ -128,16 +132,16 @@ function TopContent(props) {
                 */
                 /*space_stars.y = space_stars.y - ((space_stars.y - pointer.y) / 100);*/
 
-                if(quest_box.visible || this.input.pointer1.isDown){
-                    quest_box.x = this.input.x+12;
-                    quest_box.y = this.input.y+24;
+                if (quest_box.visible || this.input.pointer1.isDown) {
+                    quest_box.x = this.input.x + 12;
+                    quest_box.y = this.input.y + 24;
                     //console.log("cursor x:" + this.input.x +"," + this.input.y);
 
-                    quest_text_title.x = this.input.x+12+10;
-                    quest_text_title.y = this.input.y+24+10;
+                    quest_text_title.x = this.input.x + 12 + 10;
+                    quest_text_title.y = this.input.y + 24 + 10;
 
                     quest_text_body.x = quest_text_title.x;
-                    quest_text_body.y = quest_text_title.y+20;
+                    quest_text_body.y = quest_text_title.y + 20;
 
                 }
 
@@ -146,27 +150,32 @@ function TopContent(props) {
                 quest_box.y = planet.y;
                 //console.log("cursor x:" + this.input.x +"," + this.input.y);
 
-                quest_text_title.x = planet.x+12;
-                quest_text_title.y = planet.y+12;
+                quest_text_title.x = planet.x + 12;
+                quest_text_title.y = planet.y + 12;
 
                 quest_text_body.x = quest_text_title.x;
-                quest_text_body.y = quest_text_title.y+25;
+                quest_text_body.y = quest_text_title.y + 25;
 
 
                 quest_box.setScale(planet.scale);
                 //quest_text_title.setScale(planet.scale*2);
                 //quest_text_body.setScale(planet.scale*2);
 
-                quest_text_title.setFontSize(Math.abs((18*planet.scale*2)));
-                quest_text_body.setFontSize(Math.abs((10*planet.scale*2)));
+                quest_text_title.setFontSize(Math.abs((18 * planet.scale * 2)));
+                quest_text_body.setFontSize(Math.abs((10 * planet.scale * 2)));
 
                 //\\questbox position
 
 
-                if (this.input.pointer1.isDown ){
+                if (this.input.pointer1.isDown) {
+                    rotationPaused = true;
                     setQuestVisible(true);
-                }else if (!planet_on_hover){
-                    setQuestVisible(false);
+                    moveDown.pause();
+                    moveUp.pause();
+                } else if (!planet_on_hover) {
+                    rotationPaused = false;
+                    moveDown.resume();
+                    moveUp.resume();
                 }
             }
         }
@@ -295,6 +304,49 @@ function TopContent(props) {
         callback.call(curve, value);
     }
 
+    function timer(callback, delay) {
+        var timerId, start, remaining = delay;
+
+        this.pause = function () {
+            window.clearTimeout(timerId);
+            timerId = null;
+            remaining -= Date.now() - start;
+        };
+
+        this.resume = function () {
+            if (timerId) {
+                return;
+            }
+
+            start = Date.now();
+            timerId = window.setTimeout(callback, remaining);
+        };
+
+        this.resume();
+    };
+
+    function updateWorldPosition() {
+        if(!rotationPaused) {
+            moveDown = new timer(function () {
+                try {
+                    galaxyLayer.moveDown(star);
+                } catch (e) {
+                    console.log(e)
+                }
+                ;
+            }, rotationDuration * 0.8);
+
+            moveUp = new timer(function () {
+                try {
+                    galaxyLayer.moveUp(star);
+                } catch (e) {
+                    console.log(e)
+                }
+                ;
+            }, rotationDuration * 0.2);
+        }
+    }
+
     function setAnimationWorld(game) {
         var centerX = game.width / 2;
         var centerY = game.height / 2;
@@ -320,8 +372,6 @@ function TopContent(props) {
         centerPoint.setData('control', 'center').setData('vector', curve.p0);
         this.input.setDraggable(centerPoint);*/
 
-
-        let rotationDuration = 30000;
         rotationtween = this.tweens.add({
             targets: path,
             t: 1,
@@ -329,38 +379,13 @@ function TopContent(props) {
             duration: rotationDuration,
             repeat: -1,
             onStart: function () {
-                setTimeout(() => {
-                    try {
-                        galaxyLayer.moveDown(star);
-                    } catch (e) { console.log(e) };
-                    //console.log("moveDown:star");
-                }, rotationDuration * 0.8);
-
-                setTimeout(() => {
-                    try {
-                        galaxyLayer.moveUp(star);
-                    } catch (e) { console.log(e) };
-                    //console.log("moveUp:star");
-                }, rotationDuration * 0.2);
-
-                //console.log("onStart");
+                updateWorldPosition();
             },
             onRepeat() {
-                setTimeout(() => {
-                    try {
-                        galaxyLayer.moveDown(star);
-                    } catch (e) { console.log(e) };
-                    //console.log("moveDown:star");
-                }, rotationDuration * 0.8);
-
-                setTimeout(() => {
-                    try {
-                        galaxyLayer.moveUp(star);
-                    } catch (e) { console.log(e) };
-                    //console.log("moveUp:star");
-                }, rotationDuration * 0.2);
+                updateWorldPosition();
             }
         });
+
 
         circleMaskBlackhole = this.add.graphics();
         //backgroundStars.lineStyle(thickness, color, alpha);
@@ -378,13 +403,17 @@ function TopContent(props) {
 
 
         //questbox
-        quest_box = this.add.image(0,0, 'quest_box');
+        quest_box = this.add.image(0, 0, 'quest_box');
         quest_box.setVisible(0);
-        quest_box.setOrigin(0,0);
+        quest_box.setOrigin(0, 0);
         quest_box.setScale(0.50);
 
         //quest_text = this.add.text(100, 250, 'exoWorld\n exoWorld\nexoWorld\nexoWorld\n',{ fontSize:15,fontFamily: "Montreal",color: "#fffefe" });
-        quest_text_title = this.add.text(100, 250, 'EXOWORLD',{ fontSize:18,fontFamily: "NeueBit",color: "#3f5b19" });
+        quest_text_title = this.add.text(100, 250, 'EXOWORLD', {
+            fontSize: 18,
+            fontFamily: "NeueBit",
+            color: "#3f5b19"
+        });
         let text_ = 'At first glance this is a typical garden world.\n' +
             'With a comfortable and temperate atmosphere, it\n' +
             'features a plentiful and peaceful fauna and flora.\n\n' +
@@ -392,10 +421,13 @@ function TopContent(props) {
             'that at first glance looked easy, will certain prove to\n' +
             'be challenging because this planet hides many perils \n' +
             'not only above ground but also in its depths.';
-        quest_text_body = this.add.text(100, 250, text_,{ fontSize:10,fontFamily: "MondwestPixel",color: "#4b4a28" });
+        quest_text_body = this.add.text(100, 250, text_, {
+            fontSize: 10,
+            fontFamily: "MondwestPixel",
+            color: "#4b4a28"
+        });
         quest_text_title.setVisible(0);
         quest_text_body.setVisible(0);
-
 
 
         planet = this.add.sprite(500, 500);//.setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 100), Phaser.Geom.Rectangle.Contains);
@@ -407,13 +439,11 @@ function TopContent(props) {
 
 
         planet.on('pointerover', function (pointer) {
-            this.setTint(0x000000);
             planet_on_hover = true;
             setQuestVisible(true);
         });
 
         planet.on('pointerout', function (pointer) {
-            this.clearTint();
             planet_on_hover = false;
             setQuestVisible(false);
         });
@@ -461,21 +491,20 @@ function TopContent(props) {
         blackhole.setScale(0.4);
 
         galaxyLayer = this.add.layer();
-        galaxyLayer.add([space_stars, star, planet, blackhole, spotlightmask, flaremask,quest_box,quest_text_title,quest_text_body,]);
+        galaxyLayer.add([space_stars, star, planet, blackhole, spotlightmask, flaremask, quest_box, quest_text_title, quest_text_body,]);
         //  Debug graphics
         graphics = this.add.graphics();
 
 
-
-        setQuestVisible = function setQuestVisible(boolean){
+        setQuestVisible = function setQuestVisible(boolean) {
 
             quest_box.setVisible(boolean);
             quest_text_title.setVisible(boolean);
             quest_text_body.setVisible(boolean);
 
-            if(boolean){
+            if (boolean) {
                 rotationtween.pause();
-            }else{
+            } else {
                 rotationtween.resume();
             }
         }
