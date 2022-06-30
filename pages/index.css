@@ -58,6 +58,17 @@ a:hover {
 }
 
 @font-face {
+  font-family: MondwestPixel;
+  src: url('../public/assets/PPMondwest-Regular.otf') format("opentype");
+}
+
+@font-face {
+  font-family: NeueBit;
+  src: url('../public/assets/PPNeueBit-Bold.otf') format("opentype");
+}
+
+
+@font-face {
   font-family: Metro;
   src: url('../public/assets/METRO-DF.TTF') format("truetype");
 }

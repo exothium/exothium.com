@@ -9,11 +9,19 @@ function TopContent(props) {
     var text;
     var graphics;
     var planet;
+    var quest_box;
+    var quest_text_title;
+    var quest_text_body;
     var star;
     var space_stars;
     var galaxyLayer;
     var circleMaskBlackhole;
     var flaremask;
+    var input;
+    var rotationtween;
+    var planet_on_hover;
+
+    var setQuestVisible;
 
     //camera
     var maxX = 0;
@@ -38,6 +46,7 @@ function TopContent(props) {
                 //this.load.image('mask', 'assets/mainAssets/ExothiumLogo.svg');
                 //this.load.image('mask', 'assets/exothiumWorldAssets/blackHole.png');
                 //this.load.image('spotlightmask', 'assets/exothiumWorldAssets/spotlightmask.png');
+                this.load.image('quest_box', 'assets/exothiumWorldAssets/quest_box_horizontal.png');
                 this.load.image('flareSingle', 'assets/exothiumWorldAssets/bubble_effect.png');
                 this.load.image('spotlightmask', 'assets/exothiumWorldAssets/bubble_white.png');
                 this.load.image('flare', 'assets/exothiumWorldAssets/flare.png');
@@ -62,6 +71,7 @@ function TopContent(props) {
                     frameWidth: 564,
                     frameHeight: 315
                 });
+
                 this.load.on('complete', loadComplete);
             },
             create() {
@@ -74,6 +84,8 @@ function TopContent(props) {
                 maxY = game.height / 2 + game.height/20;
                 minY = game.height / 2 - game.height/20;
                 /*this.input.on('mousewheel',function(event){    return false;}, false);*/
+                input = this.input;
+                this.input.setDefaultCursor('url(assets/exothiumWorldAssets/cursor.cur), pointer');
             },
             update() {
                 //this.backgroundImage.angle += 1.25;
@@ -91,6 +103,8 @@ function TopContent(props) {
 
                 planet.x = path.vec.x;
                 planet.y = path.vec.y;
+
+
                 //make planet bigger or smaller depending on y
 
                 planet.setScale(Math.pow(1 + (((planet.y -  star.y) - 10) / (star.y / 20)), 2));
@@ -113,6 +127,47 @@ function TopContent(props) {
                 }
                 */
                 /*space_stars.y = space_stars.y - ((space_stars.y - pointer.y) / 100);*/
+
+                if(quest_box.visible || this.input.pointer1.isDown){
+                    quest_box.x = this.input.x+12;
+                    quest_box.y = this.input.y+24;
+                    //console.log("cursor x:" + this.input.x +"," + this.input.y);
+
+                    quest_text_title.x = this.input.x+12+10;
+                    quest_text_title.y = this.input.y+24+10;
+
+                    quest_text_body.x = quest_text_title.x;
+                    quest_text_body.y = quest_text_title.y+20;
+
+                }
+
+                //questbox position
+                quest_box.x = planet.x;
+                quest_box.y = planet.y;
+                //console.log("cursor x:" + this.input.x +"," + this.input.y);
+
+                quest_text_title.x = planet.x+12;
+                quest_text_title.y = planet.y+12;
+
+                quest_text_body.x = quest_text_title.x;
+                quest_text_body.y = quest_text_title.y+25;
+
+
+                quest_box.setScale(planet.scale);
+                //quest_text_title.setScale(planet.scale*2);
+                //quest_text_body.setScale(planet.scale*2);
+
+                quest_text_title.setFontSize(Math.abs((18*planet.scale*2)));
+                quest_text_body.setFontSize(Math.abs((10*planet.scale*2)));
+
+                //\\questbox position
+
+
+                if (this.input.pointer1.isDown ){
+                    setQuestVisible(true);
+                }else if (!planet_on_hover){
+                    setQuestVisible(false);
+                }
             }
         }
     });
@@ -149,6 +204,7 @@ function TopContent(props) {
 
         graphics.lineStyle(1, 0xffffff, 1);
         graphics.lineBetween(x, y + 8, x + width, y + 8);
+
 
         var text = this.add.text(x - 10, y, label + ':', { font: '16px Courier', fill: '#00ff00' }).setOrigin(1, 0);
         var textValue = this.add.text(x + width + 10, y, value.toFixed(2), { font: '16px Courier', fill: '#00ff00' });
@@ -264,8 +320,9 @@ function TopContent(props) {
         centerPoint.setData('control', 'center').setData('vector', curve.p0);
         this.input.setDraggable(centerPoint);*/
 
+
         let rotationDuration = 30000;
-        let rotationtween = this.tweens.add({
+        rotationtween = this.tweens.add({
             targets: path,
             t: 1,
             ease: 'Linear',
@@ -319,18 +376,47 @@ function TopContent(props) {
             repeat: -1
         });
 
-        planet = this.add.sprite(500, 500).setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 100), Phaser.Geom.Rectangle.Contains);
+
+        //questbox
+        quest_box = this.add.image(0,0, 'quest_box');
+        quest_box.setVisible(0);
+        quest_box.setOrigin(0,0);
+        quest_box.setScale(0.50);
+
+        //quest_text = this.add.text(100, 250, 'exoWorld\n exoWorld\nexoWorld\nexoWorld\n',{ fontSize:15,fontFamily: "Montreal",color: "#fffefe" });
+        quest_text_title = this.add.text(100, 250, 'EXOWORLD',{ fontSize:18,fontFamily: "NeueBit",color: "#3f5b19" });
+        let text_ = 'At first glance this is a typical garden world.\n' +
+            'With a comfortable and temperate atmosphere, it\n' +
+            'features a plentiful and peaceful fauna and flora.\n\n' +
+            'But looks can be deceiving, and the survival..\n' +
+            'that at first glance looked easy, will certain prove to\n' +
+            'be challenging because this planet hides many perils \n' +
+            'not only above ground but also in its depths.';
+        quest_text_body = this.add.text(100, 250, text_,{ fontSize:10,fontFamily: "MondwestPixel",color: "#4b4a28" });
+        quest_text_title.setVisible(0);
+        quest_text_body.setVisible(0);
+
+
+
+        planet = this.add.sprite(500, 500);//.setInteractive(new Phaser.Geom.Rectangle(0, 0, 100, 100), Phaser.Geom.Rectangle.Contains);
         planet.setScale(1);
         planet.play('orbit');
         planet.setMask(circleMaskBlackhole.createGeometryMask());
 
-        /*planet.on('pointerover', function (pointer) {
-            this.setTint(0xff0000);
+        planet.setInteractive({ cursor: 'url(assets/exothiumWorldAssets/cursor_action.cur), pointer' });
+
+
+        planet.on('pointerover', function (pointer) {
+            this.setTint(0x000000);
+            planet_on_hover = true;
+            setQuestVisible(true);
         });
 
         planet.on('pointerout', function (pointer) {
             this.clearTint();
-        });*/
+            planet_on_hover = false;
+            setQuestVisible(false);
+        });
 
         this.anims.create({
             key: 'rotate',
@@ -375,9 +461,24 @@ function TopContent(props) {
         blackhole.setScale(0.4);
 
         galaxyLayer = this.add.layer();
-        galaxyLayer.add([space_stars, star, planet, blackhole, spotlightmask, flaremask]);
+        galaxyLayer.add([space_stars, star, planet, blackhole, spotlightmask, flaremask,quest_box,quest_text_title,quest_text_body,]);
         //  Debug graphics
         graphics = this.add.graphics();
+
+
+
+        setQuestVisible = function setQuestVisible(boolean){
+
+            quest_box.setVisible(boolean);
+            quest_text_title.setVisible(boolean);
+            quest_text_body.setVisible(boolean);
+
+            if(boolean){
+                rotationtween.pause();
+            }else{
+                rotationtween.resume();
+            }
+        }
     }
 
 

@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import { getStarknet } from "@argent/get-starknet/dist";
 import { Contract } from "starknet";
 import registerContractAbi from "../starknet/contracts/abis/registerContract";
+import QuestSubmitModal from "./questSubmitModal";
 
 const customStyles = {
     content: {
@@ -31,41 +32,6 @@ function Quests(props) {
 
     function closeModal() {
         setIsOpen(false);
-    }
-
-    function handleChangeTwitter(e) {
-        setTwitter(e.target.value);
-    }
-
-    function handleChangeGithub(e) {
-        setGithub(e.target.value);
-    }
-
-    const handleRegisterSubmit = async (e) => {
-        try {
-            e.preventDefault();
-
-            try {
-                const starknet = getStarknet();
-                setStarknet(starknet);
-                //newConctract that is built on componentDidMount on state is not being called
-                const registerContract = new Contract(
-                    registerContractAbi,
-                    '0x01ba91aa5c08e36cbfccada801dbb31a90b0b7ce3f47e016694a9d115f2cc492',
-                    starknet.account,
-                );
-
-                await registerContract.set_address_registry(
-                    encodeShortString(twitter),
-                    encodeShortString(github)
-                );
-            } catch (e) {
-                console.error(e);
-            }
-
-        } catch (e) {
-            console.error(e)
-        }
     }
 
     function renderQuests() {
@@ -120,20 +86,9 @@ function Quests(props) {
                 overlayClassName="modalOverlay"
                 style={customStyles}
             >
-                <form onSubmit={handleRegisterSubmit}>
-                    <div>Sign with Twitter {JSON.stringify(quests)}</div>
-                    {/*<input
-                        onChange={handleChangeTwitter}
-                        value={twitter}
-                    />
-                    <div>Sign with Github {decodeShortString(encodeShortString('hey'))}</div>
-                    <input
-                        onChange={handleChangeGithub}
-                        value={github}
-                    />
-                    <input type="submit" value="Register"/>*/}
-                </form>
+                <QuestSubmitModal/>
             </Modal>
+
         )
     }
 

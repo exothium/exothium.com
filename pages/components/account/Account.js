@@ -30,11 +30,11 @@ function Account(props) {
     const [github, setGithub] = useState('');
     const [modalIsOpen, setIsOpen] = useState(false);
     const { quests, dispatchQuests } = useContext(Context);
-    const { getStarknetContractQuests } = useContext(Context);
+    const { getStarknetQuestsData } = useContext(Context);
     const { starknet } = useContext(Context);
 
     useEffect(() => {
-            if(starknet) getStarknetContractQuests();
+            if(starknet) getStarknetQuestsData();
     }, [starknet]);
 
     function openModal() {
