@@ -407,7 +407,7 @@ function TopContent(props) {
 
 
         planet.on('pointerover', function (pointer) {
-            this.setTint(0xff0000);
+            this.setTint(0x000000);
             planet_on_hover = true;
             setQuestVisible(true);
         });
