@@ -166,7 +166,7 @@ function HowItStarted() {
                 ]}
             >
                 <div className='howItStartedAuthor'>
-                    by <a target="_blank" href="https://www.linkedin.com/in/hugo-freire-a37127115/">hugo.eth</a>
+                    by <a target="_blank" href="https://twitter.com/hugofirefreire">hugo.eth</a>
                 </div>
             </Parallax>
         </div>
