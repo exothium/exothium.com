@@ -1,8 +1,48 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 
 const NoiseToSignal = props => {
 
-    const canvasRef = useRef(null)
+    const canvasRef = useRef(null);
+
+    const [windowAux, setWindow] = useState();
+
+    useEffect(() => {
+        setWindow(window);
+        const canvas = canvasRef.current;
+        x = canvas.getContext('2d')
+        x.canvas.width = window.innerWidth;
+        x.canvas.height = window.innerWidth / 6;//window.innerHeight;
+        sinHz = window.innerWidth < 1900 ? (1 - (window.innerWidth / 1900)) + 1 : 1;
+        //alert(sinHz);
+        //x = context;
+        let frameCount = -1;
+        let animationFrameId;
+
+
+        // setGradient
+        let gradient = x.createLinearGradient(0, 0, 220, 0);
+
+        // Add three color stops
+        gradient.addColorStop(0, '#a1035b');
+        gradient.addColorStop(0.9, '#ef5825');
+        gradient.addColorStop(1, '#ef5825');
+
+        // Set the fill style and draw a rectangle
+        x.fillStyle = gradient;
+        x.fillRect(0, 0, 200, 1);
+
+        //Our draw came here
+        const render = () => {
+            frameCount++
+            draw(x, frameCount)
+            animationFrameId = window.requestAnimationFrame(render)
+        }
+        render()
+
+        return () => {
+            window.cancelAnimationFrame(animationFrameId)
+        }
+    }, []);
 
     let c;
     let x;
@@ -22,6 +62,7 @@ const NoiseToSignal = props => {
 
         return "rgba(" + (r | 0) + "," + (g | 0) + "," + (b | 0) + "," + a + ")";
     };
+
 
     const draw = (x, frame) => {
         //x.clearRect(0, 0, x.canvas.width, x.canvas.height)
@@ -73,48 +114,17 @@ const NoiseToSignal = props => {
         }
     }
 
-    useEffect(() => {
-
-        const canvas = canvasRef.current
-        x = canvas.getContext('2d')
-        x.canvas.width = window.innerWidth;
-        x.canvas.height = window.innerWidth / 6;//window.innerHeight;
-        sinHz = window.innerWidth < 1900 ? (1 - (window.innerWidth / 1900)) + 1 : 1;
-        //alert(sinHz);
-        //x = context;
-        let frameCount = -1;
-        let animationFrameId;
-
-
-        // setGradient
-        let gradient = x.createLinearGradient(0, 0, 220, 0);
-
-        // Add three color stops
-        gradient.addColorStop(0, '#a1035b');
-        gradient.addColorStop(0.9, '#ef5825');
-        gradient.addColorStop(1, '#ef5825');
-
-        // Set the fill style and draw a rectangle
-        x.fillStyle = gradient;
-        x.fillRect(0, 0, 200, 1);
-
-        //Our draw came here
-        const render = () => {
-            frameCount++
-            draw(x, frameCount)
-            animationFrameId = window.requestAnimationFrame(render)
-        }
-        render()
-
-        return () => {
-            window.cancelAnimationFrame(animationFrameId)
-        }
-    }, [draw])
-
     return (<div>
             <div
-                style={{ width: "200px", height: '2px', backgroundColor: "#121212", position: "relative", marginBottom: '-2px' }}/>
-            <canvas ref={canvasRef} {...props} height={window.innerWidth / 6}/>
+                style={{
+                    width: "200px",
+                    height: '2px',
+                    backgroundColor: "#121212",
+                    position: "relative",
+                    marginBottom: '-2px'
+                }}/>
+            <canvas ref={canvasRef} {...props} height={windowAux ? windowAux.innerWidth / 6 : 0}/>
+
         </div>
     )
 }

@@ -1,7 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import Phaser from 'phaser'
-import { IonPhaser } from '@ion-phaser/react'
+import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
+import dynamic from "next/dynamic";
+
+const IonPhaser = dynamic(
+    () => import('@ion-phaser/react').then((mod) => mod.IonPhaser),
+    {
+        ssr: false
+    }
+)
 
 function TopContent(props) {
     var path;
@@ -24,6 +30,8 @@ function TopContent(props) {
     var rotationPaused = false;
     var moveUp;
     var moveDown;
+    var gameWidth = 750;
+    var gameHeight = 750;
 
     var setQuestVisible;
 
@@ -35,151 +43,173 @@ function TopContent(props) {
     let newX = 0;
     let newY = 0;
 
-    const [game, setGame] = useState({
-        width: 750,
-        height: 750,
-        type: Phaser.AUTO,
-        scene: {
-            init: function () {
-                this.cameras.main.setBackgroundColor('#121212');
-                setBlackHole = setBlackHole.bind(this);
-                setAnimationWorld = setAnimationWorld.bind(this);
-                createSlider = createSlider.bind(this);
-            },
-            preload() {
-                //this.load.image('mask', 'assets/mainAssets/ExothiumLogo.svg');
-                //this.load.image('mask', 'assets/exothiumWorldAssets/blackHole.png');
-                //this.load.image('spotlightmask', 'assets/exothiumWorldAssets/spotlightmask.png');
-                this.load.image('quest_box', 'assets/exothiumWorldAssets/quest_box_horizontal.png');
-                this.load.image('flareSingle', 'assets/exothiumWorldAssets/bubble_effect.png');
-                this.load.image('spotlightmask', 'assets/exothiumWorldAssets/bubble_white.png');
-                this.load.image('flare', 'assets/exothiumWorldAssets/flare.png');
-                this.load.image('blackhole', 'assets/exothiumWorldAssets/black_hole.png');
-                this.load.image('space_stars', 'assets/exothiumWorldAssets/space_stars.jpg');
-                //this.load.spritesheet('dragcircle', 'assets/exothiumWorldAssets/dragcircle.png', { frameWidth: 16 });
-                //this.load.image('lemming', 'assets/exothiumWorldAssets/lemming.png');
-                this.load.spritesheet('planet', 'assets/exothiumWorldAssets/planet.png', {
-                    frameWidth: 150,
-                    frameHeight: 150
-                });
-                this.load.spritesheet('star', 'assets/exothiumWorldAssets/mainStar.png', {
-                    frameWidth: 300,
-                    frameHeight: 300
-                });
+    const parentEl = useRef(null);
+    const [game, setGame] = useState();
+    const [Phaser, setPhaser] = useState();
 
-                /*this.load.spritesheet('stars', 'assets/exothiumWorldAssets/spritesheet.png', {
-                    frameWidth: 640,
-                    frameHeight: 360
-                });*/
-                this.load.spritesheet('stars', 'assets/exothiumWorldAssets/stars.png', {
-                    frameWidth: 564,
-                    frameHeight: 315
-                });
+    useEffect(async () => {
+        let Phaser = await import("phaser");
+        setPhaser(Phaser);
+    }, []);
 
-                this.load.on('complete', loadComplete);
-            },
-            create() {
+    useEffect(() =>{
 
-                setAnimationWorld(game);
-                //setBlackHole(game);
-
-                maxX = game.width / 2 + game.width / 20;
-                minX = game.width / 2 - game.width / 20;
-                maxY = game.height / 2 + game.height / 20;
-                minY = game.height / 2 - game.height / 20;
-                /*this.input.on('mousewheel',function(event){    return false;}, false);*/
-                input = this.input;
-                this.input.setDefaultCursor('url(assets/exothiumWorldAssets/cursor.cur), pointer');
-            },
-            update() {
-                //this.backgroundImage.angle += 1.25;
-
-                graphics.clear();
-
-                /*graphics.lineStyle(2, 0xffffff, 0.05);
-
-                curve.draw(graphics, 64);*/
-
-                curve.getPoint(path.t, path.vec);
-
-                //graphics.fillStyle(0xffff00, 1);
-                //graphics.fillCircle(path.vec.x, path.vec.y, 8);
-
-                planet.x = path.vec.x;
-                planet.y = path.vec.y;
-
-
-                //make planet bigger or smaller depending on y
-
-                planet.setScale(Math.pow(1 + (((planet.y - star.y) - 10) / (star.y / 20)), 2));
-                //space_stars.rotation -= 0.0005;
-                if (planet.scale > 0.875) {
-                    flaremask.setVisible(false);
-                } else {
-                    flaremask.setVisible(true);
-                }
-
-                /*newX = space_stars.x - ((this.input.mousePointer.worldX - space_stars.x) / 5000);
-                newY = space_stars.y - ((this.input.mousePointer.worldY - space_stars.y) / 5000);
-
-                if(newX >= minX && newX <= maxX) {
-                    space_stars.x = newX;
-
-                }
-                if(newY >= minY && newY <= maxY) {
-                    space_stars.y = newY;
-                }
-                */
-                /*space_stars.y = space_stars.y - ((space_stars.y - pointer.y) / 100);*/
-
-                if (quest_box.visible || this.input.pointer1.isDown) {
-                    quest_box.x = this.input.x + 12;
-                    quest_box.y = this.input.y + 24;
-                    //console.log("cursor x:" + this.input.x +"," + this.input.y);
-
-                    quest_text_title.x = this.input.x + 12 + 10;
-                    quest_text_title.y = this.input.y + 24 + 10;
-
-                    quest_text_body.x = quest_text_title.x;
-                    quest_text_body.y = quest_text_title.y + 20;
-
-                }
-
-                //questbox position
-                quest_box.x = planet.x;
-                quest_box.y = planet.y;
-                //console.log("cursor x:" + this.input.x +"," + this.input.y);
-
-                quest_text_title.x = planet.x + 12;
-                quest_text_title.y = planet.y + 12;
-
-                quest_text_body.x = quest_text_title.x;
-                quest_text_body.y = quest_text_title.y + 25;
-
-
-                quest_box.setScale(planet.scale);
-                //quest_text_title.setScale(planet.scale*2);
-                //quest_text_body.setScale(planet.scale*2);
-
-                quest_text_title.setFontSize(Math.abs((18 * planet.scale * 2)));
-                quest_text_body.setFontSize(Math.abs((10 * planet.scale * 2)));
-
-                //\\questbox position
-
-
-                if (this.input.pointer1.isDown) {
-                    rotationPaused = true;
-                    setQuestVisible(true);
-                    moveDown.pause();
-                    moveUp.pause();
-                } else if (!planet_on_hover) {
-                    rotationPaused = false;
-                    moveDown.resume();
-                    moveUp.resume();
-                }
+        Phaser && setGame(new Phaser.Game({
+            width: gameWidth,
+            height: gameHeight,
+            type: Phaser.AUTO,
+            parent: 'parentPhaser',
+            scene: {
+                init: init,
+                preload: preload,
+                create: create,
+                update: update,
             }
+        }));
+    }, [Phaser]);
+
+    function init() {
+        this.cameras.main.setBackgroundColor('#121212');
+        setBlackHole = setBlackHole.bind(this);
+        setAnimationWorld = setAnimationWorld.bind(this);
+        createSlider = createSlider.bind(this);
+    }
+
+    function preload() {
+        //this.load.image('mask', 'assets/mainAssets/ExothiumLogo.svg');
+        //this.load.image('mask', 'assets/exothiumWorldAssets/blackHole.png');
+        //this.load.image('spotlightmask', 'assets/exothiumWorldAssets/spotlightmask.png');
+        this.load.image('quest_box', 'assets/exothiumWorldAssets/quest_box_horizontal.png');
+        this.load.image('flareSingle', 'assets/exothiumWorldAssets/bubble_effect.png');
+        this.load.image('spotlightmask', 'assets/exothiumWorldAssets/bubble_white.png');
+        this.load.image('flare', 'assets/exothiumWorldAssets/flare.png');
+        this.load.image('blackhole', 'assets/exothiumWorldAssets/black_hole.png');
+        this.load.image('space_stars', 'assets/exothiumWorldAssets/space_stars.jpg');
+        //this.load.spritesheet('dragcircle', 'assets/exothiumWorldAssets/dragcircle.png', { frameWidth: 16 });
+        //this.load.image('lemming', 'assets/exothiumWorldAssets/lemming.png');
+        this.load.spritesheet('planet', 'assets/exothiumWorldAssets/planet.png', {
+            frameWidth: 150,
+            frameHeight: 150
+        });
+        this.load.spritesheet('star', 'assets/exothiumWorldAssets/mainStar.png', {
+            frameWidth: 300,
+            frameHeight: 300
+        });
+
+        /*this.load.spritesheet('stars', 'assets/exothiumWorldAssets/spritesheet.png', {
+            frameWidth: 640,
+            frameHeight: 360
+        });*/
+        this.load.spritesheet('stars', 'assets/exothiumWorldAssets/stars.png', {
+            frameWidth: 564,
+            frameHeight: 315
+        });
+
+        this.load.on('complete', loadComplete);
+    }
+
+    function create() {
+        let width = gameWidth;
+        let height = gameHeight;
+        setAnimationWorld(width, height);
+        //setBlackHole(game);
+
+        maxX = width / 2 + width / 20;
+        minX = width / 2 - width / 20;
+        maxY = height / 2 + height / 20;
+        minY = height / 2 - height / 20;
+        /*this.input.on('mousewheel',function(event){    return false;}, false);*/
+        input = this.input;
+        this.input.setDefaultCursor('url(assets/exothiumWorldAssets/cursor.cur), pointer');
+    }
+
+    function update() {
+        //this.backgroundImage.angle += 1.25;
+
+        graphics.clear();
+
+        /*graphics.lineStyle(2, 0xffffff, 0.05);
+
+        curve.draw(graphics, 64);*/
+
+        curve.getPoint(path.t, path.vec);
+
+        //graphics.fillStyle(0xffff00, 1);
+        //graphics.fillCircle(path.vec.x, path.vec.y, 8);
+
+        planet.x = path.vec.x;
+        planet.y = path.vec.y;
+
+
+        //make planet bigger or smaller depending on y
+
+        planet.setScale(Math.pow(1 + (((planet.y - star.y) - 10) / (star.y / 20)), 2));
+        //space_stars.rotation -= 0.0005;
+        if (planet.scale > 0.875) {
+            flaremask.setVisible(false);
+        } else {
+            flaremask.setVisible(true);
         }
-    });
+
+        /*newX = space_stars.x - ((this.input.mousePointer.worldX - space_stars.x) / 5000);
+        newY = space_stars.y - ((this.input.mousePointer.worldY - space_stars.y) / 5000);
+
+        if(newX >= minX && newX <= maxX) {
+            space_stars.x = newX;
+
+        }
+        if(newY >= minY && newY <= maxY) {
+            space_stars.y = newY;
+        }
+        */
+        /*space_stars.y = space_stars.y - ((space_stars.y - pointer.y) / 100);*/
+
+        if (quest_box.visible || this.input.pointer1.isDown) {
+            quest_box.x = this.input.x + 12;
+            quest_box.y = this.input.y + 24;
+            //console.log("cursor x:" + this.input.x +"," + this.input.y);
+
+            quest_text_title.x = this.input.x + 12 + 10;
+            quest_text_title.y = this.input.y + 24 + 10;
+
+            quest_text_body.x = quest_text_title.x;
+            quest_text_body.y = quest_text_title.y + 20;
+
+        }
+
+        //questbox position
+        quest_box.x = planet.x;
+        quest_box.y = planet.y;
+        //console.log("cursor x:" + this.input.x +"," + this.input.y);
+
+        quest_text_title.x = planet.x + 12;
+        quest_text_title.y = planet.y + 12;
+
+        quest_text_body.x = quest_text_title.x;
+        quest_text_body.y = quest_text_title.y + 25;
+
+
+        quest_box.setScale(planet.scale);
+        //quest_text_title.setScale(planet.scale*2);
+        //quest_text_body.setScale(planet.scale*2);
+
+        quest_text_title.setFontSize(Math.abs((18 * planet.scale * 2)));
+        quest_text_body.setFontSize(Math.abs((10 * planet.scale * 2)));
+
+        //\\questbox position
+
+
+        if (this.input.pointer1.isDown) {
+            rotationPaused = true;
+            setQuestVisible(true);
+            moveDown.pause();
+            moveUp.pause();
+        } else if (!planet_on_hover) {
+            rotationPaused = false;
+            moveDown.resume();
+            moveUp.resume();
+        }
+    }
 
     const loadComplete = () => {
         props.completeLoading('blackhole');
@@ -326,7 +356,7 @@ function TopContent(props) {
     };
 
     function updateWorldPosition() {
-        if(!rotationPaused) {
+        if (!rotationPaused) {
             moveDown = new timer(function () {
                 try {
                     galaxyLayer.moveDown(star);
@@ -347,9 +377,9 @@ function TopContent(props) {
         }
     }
 
-    function setAnimationWorld(game) {
-        var centerX = game.width / 2;
-        var centerY = game.height / 2;
+    function setAnimationWorld(width, height) {
+        var centerX = width / 2;
+        var centerY = height / 2;
 
 
         path = { t: 0, vec: new Phaser.Math.Vector2() };
@@ -518,7 +548,7 @@ function TopContent(props) {
                 alt="Logo"
                 className="blackHole"
             />
-            <IonPhaser game={game} initialize={true} className='phaserTopContent'/>
+            <div id='parentPhaser'/>
         </div>
     );
 }
