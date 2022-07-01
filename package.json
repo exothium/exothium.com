@@ -7,7 +7,8 @@
     "build": "next build",
     "lint": "next lint",
     "start": "next start -p 1337",
-    "beta": "next start -p 8080"
+    "beta": "next start -p 8080",
+    "startServer": "next start"
   },
   "dependencies": {
     "@argent/get-starknet": "^3.2.1",
