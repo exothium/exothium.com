@@ -5,9 +5,9 @@ import { Contract, number, shortString } from "starknet";
 import registerContractAbi from "../../starknet/contracts/abis/registerContract";
 import ClipLoader from "react-spinners/ClipLoader";
 import RingLoader from "react-spinners/RingLoader";
-import { truncateString } from '../../jsUtils/utils';
-import { connectStarknet, networkId } from "../../starknet/utils/starknet";
-import { Context } from "../context/Context";
+import { truncateString } from '../../../components/utils';
+import { connectStarknet, networkId } from "../../../components/starknet";
+import { Context } from "../../../components/Context";
 import Link from "next/link";
 
 const { toBN, toHex } = number;

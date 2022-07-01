@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Context } from "../components/context/Context";
+import { Context } from "../../components/Context";
 import Modal from "react-modal";
 import { getStarknet } from "@argent/get-starknet/dist";
 import { Contract } from "starknet";

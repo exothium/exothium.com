@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Context } from './Context';
-import { connectStarknet, networkId } from "../../starknet/utils/starknet";
+import { Context } from '../../../components/Context';
+import { connectStarknet, networkId } from "../../../components/starknet";
 import { Contract } from "starknet";
 import registerContractAbi from "../../starknet/contracts/abis/registerContract";
-import QuestsState from "../../quests/questsState";
+import QuestsState from "../../../components/questsState";
 
 
 function ContextWrapper(props) {

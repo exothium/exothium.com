@@ -10,12 +10,19 @@ import 'react-toastify/dist/ReactToastify.css';
 //Custom Components
 import TextGradient from "./components/textGradient/TextGradient";
 import MainLoading from "./components/loading/MainLoading";
-import NoiseToSignal from "./components/NoiseToSignal";
 import Roadmap from "./components/roadmap/Roadmap";
 import HowItStarted from "./components/howItStarted/HowItStarted";
 import Navbar from "./components/navbar/Navbar";
 import ContextWrapper from './components/context/ContextWrapper';
 import Footer from "./components/footer/Footer";
+
+let NoiseToSignal = dynamic(
+    () => import("./components/NoiseToSignal"),
+    {
+        ssr: false
+    }
+)
+
 let TopContent = dynamic(
     () => import("./components/topContent/TopContent"),
     {

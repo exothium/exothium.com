@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 import { getStarknet } from "@argent/get-starknet";
 import { Contract, number, shortString } from "starknet"
 import registerContractAbi from "../../starknet/contracts/abis/registerContract";
-import { connectStarknet } from "../../starknet/utils/starknet";
+import { connectStarknet } from "../../../components/starknet";
 import Account from '../account/Account';
 import { useRouter } from "next/router";
 import Link from "next/link";
