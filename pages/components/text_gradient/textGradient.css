@@ -11,7 +11,7 @@
     background-size: 100%;
     -webkit-background-clip: text;*/
     color: navajowhite;
-    padding: 50px 0px 300px 0px;
+    padding: 50px 0px 150px 0px;
     font-size: 30px;
     font-family: Montreal;
 }
@@ -27,6 +27,7 @@
 @media screen and (max-width: 650px) {
     .textGradientParent {
         font-size: 20px;
-        padding: 25px 0px 50px 0px;
+        padding: 3% 5%;
+        margin-bottom: 50px;
     }
 }

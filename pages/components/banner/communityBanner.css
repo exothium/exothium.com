@@ -1,0 +1,78 @@
+#communityBannerOverlay {
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.9)0%, rgba(58, 131, 136, 0.5) 10%, rgba(0, 0, 0, 0.9) 75%, rgba(0, 0, 0, 0.9) 100%);
+    display: inline-block;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+.communityBannerWrapper {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 25px 5%;
+    font-family: Metro, Arial, sans-serif;
+    color: whitesmoke;
+}
+
+.communityBannerTitle {
+    font-size: 75px;
+    display: flex;
+    text-shadow: 5px -1px 10px #000000;
+    text-align: left;
+}
+
+.communityBannerBottomDiv {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.communityBannerDescription {
+    font-size: 25px;
+    font-family: Montreal, Metro, -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    text-align: left;
+    text-shadow: 5px 1px 4px #000000;
+    color: #cbcbcb;
+}
+
+.communityBannerButton {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 3%;
+}
+
+.communityBannerWrapperChild {
+    width: 50%;
+    margin-left: 40%;
+}
+
+@media screen and (max-width: 650px) {
+    .communityBannerWrapper {
+        padding: 0px 5% !important;
+        width: 90% !important;
+    }
+    .communityBannerTitle {
+        margin-top: -25px !important;
+        font-size: 20px;
+    }
+    .communityBannerDescription {
+        margin-top: 5px;
+        font-size: 11px;
+        display: inline-block;
+    }
+    .communityBannerWrapperChild {
+        width: 100%;
+        margin-left: 0%;
+    }
+    .communityBannerBottomDiv {
+        margin-top: 5px;
+    }
+}

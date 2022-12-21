@@ -1,9 +1,9 @@
 .howItStartedParent {
-    margin: 125px 0px;
     color: navajowhite;
     font-family: Montreal;
     font-size: 22px;
     text-align: left;
+    padding: 3% 5%;
 }
 
 .howItStartedText {
@@ -20,6 +20,7 @@
 
 .showMoreWrapper {
     margin-top: 75px;
+    color: whitesmoke;
 }
 
 @media screen and (max-width: 650px) {

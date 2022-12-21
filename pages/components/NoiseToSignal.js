@@ -123,8 +123,7 @@ const NoiseToSignal = props => {
                     position: "relative",
                     marginBottom: '-2px'
                 }}/>
-            <canvas ref={canvasRef} {...props} height={windowAux ? windowAux.innerWidth / 6 : 0}/>
-
+            <canvas ref={canvasRef} {...props} width={'100%'}/>
         </div>
     )
 }

@@ -36,17 +36,12 @@ function HowItStarted() {
                 />
             </Parallax>
             <Parallax
-                translateX={[
-                    '-100%',
-                    '0%',
-                    'ease'
-                ]}
                 opacity={[
-                    -5,
+                    0,
                     1,
-                    'ease'
+                    'easeInBack'
                 ]}
-                rootMargin={{ top: 1500, right: 100, bottom: 0, left: 100 }}
+                rootMargin={{top: 0, right: 0, bottom: -500, left: 0}}
             >
                 <div className='roadmapTitle'>
                     HOW IT STARTED

@@ -13,9 +13,21 @@
     max-width: 100%;
 }
 
+.topContentImageWrapper {
+    width: 50%;
+}
+
+.topContentPhaserWrapper {
+    width: 50%;
+}
+
 @media screen and (max-width: 650px) {
-    .phaserTopContent {
-        zoom: 0.35;
+    .topContentImageWrapper {
+        width: 100%;
+    }
+
+    .topContentPhaserWrapper {
+        width: 100%;
     }
 }
 

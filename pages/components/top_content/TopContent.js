@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import ReactDOM from 'react-dom';
 import dynamic from "next/dynamic";
 
@@ -52,11 +52,15 @@ function TopContent(props) {
         setPhaser(Phaser);
     }, []);
 
-    useEffect(() =>{
+    useEffect(() => {
 
         Phaser && setGame(new Phaser.Game({
-            width: gameWidth,
-            height: gameHeight,
+            scale: {
+                mode: Phaser.Scale.FIT,
+                autoCenter: Phaser.Scale.CENTER_BOTH,
+                width: gameWidth,
+                height: gameHeight,
+            },
             type: Phaser.AUTO,
             parent: 'parentPhaser',
             scene: {
@@ -245,8 +249,8 @@ function TopContent(props) {
         graphics.lineBetween(x, y + 8, x + width, y + 8);
 
 
-        var text = this.add.text(x - 10, y, label + ':', { font: '16px Courier', fill: '#00ff00' }).setOrigin(1, 0);
-        var textValue = this.add.text(x + width + 10, y, value.toFixed(2), { font: '16px Courier', fill: '#00ff00' });
+        var text = this.add.text(x - 10, y, label + ':', {font: '16px Courier', fill: '#00ff00'}).setOrigin(1, 0);
+        var textValue = this.add.text(x + width + 10, y, value.toFixed(2), {font: '16px Courier', fill: '#00ff00'});
 
         var image = this.add.image(x, y + 8, 'dragcircle', 0).setInteractive();
 
@@ -382,7 +386,7 @@ function TopContent(props) {
         var centerY = height / 2;
 
 
-        path = { t: 0, vec: new Phaser.Math.Vector2() };
+        path = {t: 0, vec: new Phaser.Math.Vector2()};
 
         curve = new Phaser.Curves.Ellipse(centerX, centerY, 100, 150);
         curve.setXRadius(10);
@@ -465,7 +469,7 @@ function TopContent(props) {
         planet.play('orbit');
         planet.setMask(circleMaskBlackhole.createGeometryMask());
 
-        planet.setInteractive({ cursor: 'url(assets/exothiumWorldAssets/cursor_action.cur), pointer' });
+        planet.setInteractive({cursor: 'url(assets/exothiumWorldAssets/cursor_action.cur), pointer'});
 
 
         planet.on('pointerover', function (pointer) {
@@ -480,7 +484,7 @@ function TopContent(props) {
 
         this.anims.create({
             key: 'rotate',
-            frames: this.anims.generateFrameNumbers('star', { start: 0, end: 299 }),
+            frames: this.anims.generateFrameNumbers('star', {start: 0, end: 299}),
             frameRate: 15,
             repeat: -1
         });
@@ -504,7 +508,7 @@ function TopContent(props) {
 
         this.anims.create({
             key: 'stars',
-            frames: this.anims.generateFrameNumbers('stars', { start: 0, end: 224 }),
+            frames: this.anims.generateFrameNumbers('stars', {start: 0, end: 224}),
             frameRate: 10,
             repeat: -1
         });
@@ -543,12 +547,16 @@ function TopContent(props) {
 
     return (
         <div className='topContentBody'>
-            <img
-                src={'./assets/mainAssets/horizontal_exothium.svg'}
-                alt="Logo"
-                className="blackHole"
-            />
-            <div id='parentPhaser'/>
+            <div className='topContentImageWrapper'>
+                <img
+                    src={'./assets/mainAssets/horizontal_exothium.svg'}
+                    alt="Logo"
+                    className="blackHole"
+                />
+            </div>
+            <div className='topContentPhaserWrapper'>
+                <div id='parentPhaser'/>
+            </div>
         </div>
     );
 }
