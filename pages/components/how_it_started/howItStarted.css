@@ -1,0 +1,30 @@
+.howItStartedParent {
+    color: navajowhite;
+    font-family: Montreal;
+    font-size: 22px;
+    text-align: left;
+    padding: 3% 5%;
+}
+
+.howItStartedText {
+    margin-top: 75px;
+}
+
+.howItStartedAuthor {
+    margin-top: 25px;
+    color: whitesmoke;
+    font-family: Montreal;
+    font-size: 16px;
+    text-align: right;
+}
+
+.showMoreWrapper {
+    margin-top: 75px;
+    color: whitesmoke;
+}
+
+@media screen and (max-width: 650px) {
+    .howItStartedParent {
+        font-size: 16px;
+    }
+}

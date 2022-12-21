@@ -1,0 +1,33 @@
+.topContentBody {
+    width: 100%;
+    min-height: 250px;
+    background: #121212;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.blackHole {
+    height: 125px;
+    max-width: 100%;
+}
+
+.topContentImageWrapper {
+    width: 50%;
+}
+
+.topContentPhaserWrapper {
+    width: 50%;
+}
+
+@media screen and (max-width: 650px) {
+    .topContentImageWrapper {
+        width: 100%;
+    }
+
+    .topContentPhaserWrapper {
+        width: 100%;
+    }
+}
+

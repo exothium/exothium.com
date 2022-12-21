@@ -1,0 +1,30 @@
+.buttonCommon {
+    padding: 10px;
+    border-radius: 5px;
+    background: linear-gradient(to right, #a1035b, #ef5825) padding-box, linear-gradient(to right, #5d1f0d, #ef5825) border-box;
+    border: 2px solid transparent;
+    font-family: Metro, Arial, sans-serif;
+    color: whitesmoke;
+    font-size: 15px;
+    cursor: pointer;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.buttonCommon:hover {
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+    background: linear-gradient(to left, #a1035b, #ef5825) padding-box, linear-gradient(to right, #ef5825, #ef5825) border-box;
+    box-shadow: 0px 0px 15px 1px #ef5825 !important;
+}
+
+@media screen and (max-width: 650px) {
+    .buttonCommon {
+        font-size: 10px;
+        padding: 5px;
+    }
+}
