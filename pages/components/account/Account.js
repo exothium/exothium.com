@@ -157,7 +157,7 @@ function Account(props) {
                 {starknet ?
                     (starknet.selectedAddress ? truncateString(starknet.selectedAddress, 12) : 'Not Connected')
                     :
-                    'Not wallet detected'
+                    'No wallet detected'
                 }
             </button>
             {starknet && renderAccountDetails()}

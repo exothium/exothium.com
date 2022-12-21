@@ -1,7 +1,6 @@
 .navbar {
     display: flex;
-    padding: 25px;
-    padding-bottom: 0px;
+    padding: 25px 5% 0px 5%;
 }
 
 .navbarNavigation {
