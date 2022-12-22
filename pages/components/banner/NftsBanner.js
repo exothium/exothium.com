@@ -42,7 +42,7 @@ function nftsBanner() {
                             <span className='nftsBannerDescription'>
                                 ExoWorld offers a wide range of NFT combinations for players to collect and trade.
                                 With over 15,552 possible combinations, there is sure to be something for everyone.
-                                Additionally, we will be releasing a limited edition run of 5,000 mintable NFTs, adding even more variety to the collection.
+                                Additionally, we will be releasing a limited edition run of 5,000 mintable NFTs.
                                 Please note that these NFTs are only available to players on the blockchain mode of Exothium (Yin) and are not available for the free version of Exothiums spawned games (Yang).
                             </span>
                             </Parallax>

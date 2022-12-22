@@ -52,6 +52,12 @@
     width: 50%;
 }
 
+@media screen and (max-width: 1600px) {
+    .openSourceBannerDescription {
+        font-size: 20px;
+    }
+}
+
 @media screen and (max-width: 650px) {
     .openSourceBannerWrapper {
         padding: 0px 5% !important;

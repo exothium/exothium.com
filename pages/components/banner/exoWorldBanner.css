@@ -55,6 +55,12 @@
     width: 50%;
 }
 
+@media screen and (max-width: 1600px) {
+    .exoWorldBannerDescription {
+        font-size: 20px;
+    }
+}
+
 @media screen and (max-width: 650px) {
     .exoWorldBannerWrapper {
         padding: 0px 5% !important;
