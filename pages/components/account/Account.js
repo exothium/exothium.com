@@ -32,6 +32,7 @@ function Account(props) {
     const { quests, dispatchQuests } = useContext(Context);
     const { getStarknetQuestsData } = useContext(Context);
     const { starknet } = useContext(Context);
+    const { connectToStarknet } = useContext(Context);
 
     useEffect(() => {
             if(starknet) getStarknetQuestsData();
@@ -152,7 +153,7 @@ function Account(props) {
         <div className='accountRoot'>
             <button
                 className='accountButton'
-                onClick={starknet ? openModal : connectStarknet}
+                onClick={starknet ? openModal : connectToStarknet}
             >
                 {starknet ?
                     (starknet.selectedAddress ? truncateString(starknet.selectedAddress, 12) : 'Not Connected')

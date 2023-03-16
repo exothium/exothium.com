@@ -1,8 +1,8 @@
-import { questsInfo } from "./questsInfo";
-import { number, shortString } from "starknet";
+import {questsInfo} from "./questsInfo";
+import {number, shortString} from "starknet";
 
-const { toBN, toHex } = number;
-const { encodeShortString, decodeShortString } = shortString;
+const {toBN, toHex} = number;
+const {encodeShortString, decodeShortString} = shortString;
 
 
 class QuestsState {
@@ -25,7 +25,7 @@ class QuestsState {
 
     getQuestNumber(contractName) {
         for (let i = 0; i < this.quests.length; i++) {
-            if(this.quests[i].contractName === contractName) {
+            if (this.quests[i].contractName === contractName) {
                 return this.quests[i].questNumber;
             }
         }
@@ -43,7 +43,7 @@ class QuestsState {
         registerContract.get_address_registry(starknet.selectedAddress).then(function (value) {
             let twitterValue = decodeShortString(toHex(value.twitter));
             let githubValue = decodeShortString(toHex(value.github));
-            twitterValue =  twitterValue === "0" ? null : twitterValue;
+            twitterValue = twitterValue === "0" ? null : twitterValue;
             githubValue = githubValue === "0" ? null : githubValue;
 
             let starknetContractInfo = {
@@ -51,12 +51,11 @@ class QuestsState {
                 github: githubValue,
             };
 
-
             let questsUpdate = JSON.parse(JSON.stringify(auxThis.quests));
             questsUpdate[questNumber - 1].starknetContractInfo = starknetContractInfo;
             questsUpdate[questNumber - 1].contractInteraction.twitter.value = twitterValue;
             questsUpdate[questNumber - 1].contractInteraction.github.value = githubValue;
-            if(twitterValue || githubValue) {
+            if (twitterValue || githubValue) {
                 questsUpdate[questNumber - 1].finished = true;
             }
             auxThis.setQuests(questsUpdate);

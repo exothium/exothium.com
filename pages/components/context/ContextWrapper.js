@@ -14,14 +14,14 @@ function ContextWrapper(props) {
 
     questsState.setDispatcher(setQuests);
 
-    useEffect(() => {
+    /*useEffect(() => {
         //checks if wallet is connected then checks what network he is connected
         connectToStarknet().then(r => {
             console.log(networkId());
         });
-    }, []);
+    }, []);*/
 
-    const connectToStarknet = async () => {
+    async function connectToStarknet() {
         let starknet = await connectStarknet();
 
         const registerContract = new Contract(
@@ -43,7 +43,7 @@ function ContextWrapper(props) {
 
     return (
         <Context.Provider
-            value={{ getStarknetQuestsData, quests, starknet, contracts }}>
+            value={{ getStarknetQuestsData, connectToStarknet, quests, starknet, contracts }}>
             {props.children}
         </Context.Provider>
     )
